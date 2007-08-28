@@ -68,7 +68,6 @@ Icon=%{name}
 Terminal=false
 Type=Application
 Categories=Electricity;Science;X-MandrivaLinux-MoreApplications-Sciences-Electricity;
-Encoding=UTF-8
 EOF
 
 %post

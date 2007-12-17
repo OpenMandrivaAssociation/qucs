@@ -11,7 +11,6 @@ Source0: 			%{name}-%{version}.tar.bz2
 License: 			QPL
 Group: 				Sciences/Other
 Url: http://qucs.sourceforge.net/
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 BuildRequires: flex, bison, qt3-devel, ImageMagick
 
 %description

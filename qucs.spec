@@ -1,5 +1,5 @@
 %define name 		qucs
-%define version 	0.0.12
+%define version 	0.0.13
 %define release 	%mkrel 1
 %define Summary		An integrated circuit simulator
 
@@ -7,7 +7,7 @@ Summary: 			%{Summary}
 Name: 				%{name}
 Version:			%{version}
 Release: 			%{release}
-Source0: 			%{name}-%{version}.tar.bz2
+Source0: 			%{name}-%{version}.tar.gz
 License: 			QPL
 Group: 				Sciences/Other
 Url: http://qucs.sourceforge.net/

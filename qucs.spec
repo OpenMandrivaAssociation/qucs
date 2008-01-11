@@ -46,17 +46,6 @@ chmod 644 %{buildroot}%{_iconsdir}/%{iconname}
 chmod 644 %{buildroot}%{_liconsdir}/%{iconname}
 
 # add menu
-mkdir -p $RPM_BUILD_ROOT%{_menudir}
-cat > $RPM_BUILD_ROOT%{_menudir}/%{name} <<EOF
-?package(%{name}):\
-command="%{_bindir}/%{name}"\
-needs="x11" \
-section="More Applications/Sciences/Electricity"\
-title="Qucs"\
-icon="%{iconname}"\
-longtitle="Simulate electrical circuits"\
-xdg="true"
-EOF
 
 mkdir -p %{buildroot}%{_datadir}/applications
 cat > %{buildroot}%{_datadir}/applications/mandriva-%{name}.desktop << EOF
@@ -85,7 +74,6 @@ rm -rf %{buildroot}
 %{_bindir}/*
 %{_datadir}/%{name}
 %{_mandir}/man?/*
-%{_menudir}/%{name}
 %{_iconsdir}/%{iconname}
 %{_miconsdir}/%{iconname}
 %{_liconsdir}/%{iconname}

@@ -1,6 +1,6 @@
 %define name 		qucs
 %define version 	0.0.14
-%define release 	%mkrel 3
+%define release 	%mkrel 4
 %define Summary		An integrated circuit simulator
 
 Summary: 			%{Summary}

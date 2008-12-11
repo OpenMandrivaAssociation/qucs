@@ -12,7 +12,7 @@ License: 			QPL
 Group: 				Sciences/Other
 Url: http://qucs.sourceforge.net/
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
-BuildRequires: flex, bison, qt3-devel, ImageMagick
+BuildRequires: flex, bison, qt3-devel, imagemagick
 
 %description
 Qucs is going to be an integrated circuit simulator which means you will be

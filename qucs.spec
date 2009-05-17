@@ -1,6 +1,6 @@
 %define name 		qucs
-%define version 	0.0.14
-%define release 	%mkrel 4
+%define version 	0.0.15
+%define release 	%mkrel 1
 %define Summary		An integrated circuit simulator
 
 Summary: 			%{Summary}
@@ -8,6 +8,8 @@ Name: 				%{name}
 Version:			%{version}
 Release: 			%{release}
 Source0: 			%{name}-%{version}.tar.gz
+Patch0:				%{name}-%{version}-fix-format.patch
+Patch1:				%{name}-%{version}-fix-format2.patch
 License: 			QPL
 Group: 				Sciences/Other
 Url: http://qucs.sourceforge.net/
@@ -23,6 +25,9 @@ presentation page or window.
 
 %prep
 %setup -q 
+%patch0 -p1
+%patch1 -p1
+
 %build
 
 export PATH=$PATH:$QTDIR/bin
@@ -82,4 +87,3 @@ rm -rf %{buildroot}
 %{_miconsdir}/%{iconname}
 %{_liconsdir}/%{iconname}
 %{_datadir}/applications/*
-

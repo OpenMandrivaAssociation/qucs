@@ -1,21 +1,13 @@
-%define name 		qucs
-%define version 	0.0.16
-%define release 	%mkrel 1
-%define Summary		An integrated circuit simulator
-
-Summary: 			%{Summary}
-Name: 				%{name}
-Version:			%{version}
-Release: 			%{release}
-Source0: 			%{name}-%{version}.tar.gz
-#Patch0:				%{name}-%{version}-fix-format.patch
-#Patch1:				%{name}-%{version}-fix-format2.patch
-License: 			QPL
-Group: 				Sciences/Other
-Url: http://qucs.sourceforge.net/
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
-BuildRequires: flex, bison, qt3-devel, imagemagick
-
+Summary:	An integrated circuit simulator
+Name:		qucs
+Version:	0.0.16
+Release:	%mkrel 1
+License:	QPL
+Group:		Sciences/Other
+URL:		http://qucs.sourceforge.net/
+Source0:	%{name}-%{version}.tar.gz
+Patch0:		qucs-0.0.16-format_string_fixes.diff
+BuildRequires:	flex, bison, qt3-devel, imagemagick
 %description
 Qucs is going to be an integrated circuit simulator which means you will be
 able to setup a circuit with a graphical user interface (GUI) and simulate the 
@@ -24,20 +16,23 @@ simulation has finished you can present the simulation results on a
 presentation page or window.
 
 %prep
-%setup -q 
-#%patch0 -p1
-#%patch1 -p1
+
+%setup -q
+%patch0 -p1
 
 %build
 
-export PATH=$PATH:$QTDIR/bin
+export QTDIR=%{qt3dir}
+export PATH=$PATH:%{qt3bin}
 
-perl -pi -e 's|/usr/local/qt/lib|\$QTDIR/%{_lib}|' configure
-%configure 
+perl -pi -e 's|/usr/local/qt/lib|%{qt3lib}|' configure*
+perl -pi -e 's|/usr/local/qt/include|%{qt3include}|' configure*
+
+%configure_qt3
 %make
 
 %install
-rm -rf %{buildroot}
+
 %makeinstall
 
 %define button qucs/bitmaps/ysmith.png
@@ -64,21 +59,7 @@ Type=Application
 Categories=Electricity;Science;X-MandrivaLinux-MoreApplications-Sciences-Electricity;
 EOF
 
-%if %mdkversion < 200900
-%post
-%update_menus
-%endif
-
-%if %mdkversion < 200900
-%postun
-%clean_menus
-%endif
-
-%clean
-rm -rf %{buildroot}
-
 %files
-%defattr(-,root,root)
 %doc README
 %{_bindir}/*
 %{_datadir}/%{name}

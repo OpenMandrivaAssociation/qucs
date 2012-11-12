@@ -1,0 +1,102 @@
+diff -Naurp qucs-0.0.16/qucs-core/src/converter/qucs_producer.cpp qucs-0.0.16.oden/qucs-core/src/converter/qucs_producer.cpp
+--- qucs-0.0.16/qucs-core/src/converter/qucs_producer.cpp	2011-03-12 02:00:57.000000000 +0100
++++ qucs-0.0.16.oden/qucs-core/src/converter/qucs_producer.cpp	2012-04-24 15:36:43.029519981 +0200
+@@ -499,28 +499,28 @@ static void qucslib_list_device (struct
+   
+   sprintf (txt, "\n<Component %s>\n", def->instance[0] == dev->stype[0] ?
+ 	   &def->instance[1] : def->instance);
+-  fprintf (qucs_out, txt);
+-  fprintf (qucs_out, "  <Description>\n");
+-  fprintf (qucs_out, "  </Description>\n");
+-  fprintf (qucs_out, "  <Model>\n");
++  fprintf (qucs_out, "%s", txt);
++  fprintf (qucs_out, "%s", "  <Description>\n");
++  fprintf (qucs_out, "%s", "  </Description>\n");
++  fprintf (qucs_out, "%s", "  <Model>\n");
+   fprintf (qucs_out, "    <%s %s_ %s", dev->ltype,
+ 	   netlist_instance (def->instance), dev->coords);
+   for (int i = 0; dev->props[i]; i++) {
+     if ((pair = qucslib_find_prop (def, dev->props[i])) != NULL) {
+-      fprintf (qucs_out, " \"");
++      fprintf (qucs_out, "%s", " \"");
+       netlist_list_value (pair->value);
+-      fprintf (qucs_out, "\" 0");
++      fprintf (qucs_out, "%s", "\" 0");
+     }
+   }
+-  fprintf (qucs_out, ">\n");
+-  fprintf (qucs_out, "  </Model>\n");
+-  fprintf (qucs_out, "</Component>\n");
++  fprintf (qucs_out, "%s", ">\n");
++  fprintf (qucs_out, "%s", "  </Model>\n");
++  fprintf (qucs_out, "%s", "</Component>\n");
+ }
+ 
+ /* This function is the overall Qucs library producer. */
+ void qucslib_producer (void) {
+   struct definition_t * def;
+-  fprintf (qucs_out, "<Qucs Library " PACKAGE_VERSION " \"Generic\">\n");
++  fprintf (qucs_out, "%s", "<Qucs Library " PACKAGE_VERSION " \"Generic\">\n");
+   for (def = device_root; def; def = def->next) {
+     qucslib_list_device (def);
+   }
+@@ -530,7 +530,7 @@ void qucslib_producer (void) {
+ void qucsdata_producer_vcd (void) {
+   struct dataset_variable * ds;
+   struct dataset_value * dv;
+-  fprintf (qucs_out, "<Qucs Dataset " PACKAGE_VERSION ">\n");
++  fprintf (qucs_out, "%s", "<Qucs Dataset " PACKAGE_VERSION ">\n");
+   for (ds = dataset_root; ds; ds = ds->next) {
+     if (!ds->output || ds->type == DATA_UNKNOWN)
+       continue;
+@@ -543,9 +543,9 @@ void qucsdata_producer_vcd (void) {
+       fprintf (qucs_out, "  %s\n", dv->value);
+     }
+     if (ds->type == DATA_INDEPENDENT)
+-      fprintf (qucs_out, "</indep>\n");
++      fprintf (qucs_out, "%s", "</indep>\n");
+     else if (ds->type == DATA_DEPENDENT)
+-      fprintf (qucs_out, "</dep>\n");
++      fprintf (qucs_out, "%s", "</dep>\n");
+   }
+ }
+ 
+diff -Naurp qucs-0.0.16/qucs-edit/main.cpp qucs-0.0.16.oden/qucs-edit/main.cpp
+--- qucs-0.0.16/qucs-edit/main.cpp	2011-03-03 17:14:01.000000000 +0100
++++ qucs-0.0.16.oden/qucs-edit/main.cpp	2012-04-24 15:36:38.001483245 +0200
+@@ -113,7 +113,8 @@ bool saveApplSettings(QucsEdit *qucs)
+ // #########################################################################
+ void showOptions()
+ {
+-  fprintf(stdout, QObject::tr("Qucs Editor Version ")+PACKAGE_VERSION+
++  fprintf(stdout, "%s", 
++    QObject::tr("Qucs Editor Version ")+PACKAGE_VERSION+
+     QObject::tr("\nVery simple text editor for Qucs\n")+
+     QObject::tr("Copyright (C) 2004, 2005 by Michael Margraf\n")+
+     QObject::tr("\nUsage:  qucsedit [-r] file\n")+
+@@ -169,7 +170,7 @@ int main(int argc, char *argv[])
+     s = argv[i];
+     if(s.at(0) == '-') {
+       if(s.length() != 2) {
+-	fprintf(stdout, QObject::tr("Too long command line argument!\n\n"));
++	fprintf(stdout, "%s", QObject::tr("Too long command line argument!\n\n"));
+ 	showOptions();
+ 	return -1;
+       }
+@@ -179,14 +180,14 @@ int main(int argc, char *argv[])
+ 	case 'h': showOptions();
+ 		  return 0;
+ 	default :
+-	  fprintf(stderr, QObject::tr("Wrong command line argument!\n\n"));
++	  fprintf(stderr, "%s", QObject::tr("Wrong command line argument!\n\n"));
+ 	  showOptions();
+ 	  return -1;
+       }
+     }
+     else  if(FileName.isEmpty())  FileName = s;
+ 	  else {
+-	    fprintf(stderr, QObject::tr("Only one filename allowed!\n\n"));
++	    fprintf(stderr, "%s", QObject::tr("Only one filename allowed!\n\n"));
+ 	    showOptions();
+ 	    return -1;
+ 	  }

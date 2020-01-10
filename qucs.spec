@@ -26,7 +26,7 @@ presentation page or window.
 
 %prep
 %setup -q
-%apply_patches
+%autopatch -p1
 
 %build
 autoreconf -vfi

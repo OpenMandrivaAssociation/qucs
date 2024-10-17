@@ -8,7 +8,7 @@ Version:	0.0.17
 Release:	1
 License:	QPL
 Group:		Sciences/Other
-Url:		http://qucs.sourceforge.net/
+Url:		https://qucs.sourceforge.net/
 Source0:	%{name}-%{version}.tar.gz
 Patch0:		qucs-0.0.17-format-security.patch
 BuildRequires:	adms

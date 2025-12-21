@@ -11,6 +11,11 @@ Group:		Sciences/Other
 Url:		https://qucs.sourceforge.net/
 Source0:	%{name}-%{version}.tar.gz
 Patch0:		qucs-0.0.17-format-security.patch
+BuildRequires:	autoconf
+BuildRequires:	automake
+BuildRequires:	libtool-base
+BuildRequires:	slibtool
+BuildRequires:	make
 BuildRequires:	adms
 BuildRequires:	flex
 BuildRequires:	bison
